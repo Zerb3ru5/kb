@@ -58,7 +58,6 @@ def list(property, value):
     """
     cmd.list(property, value)
 
-    # TODO: make a special detailed overview on search for id
     # TODO: add special tree view of all items when tree is typed in
 
 

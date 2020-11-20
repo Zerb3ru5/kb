@@ -8,5 +8,5 @@ setup(
         'console_scripts':{
             'kb = kb.__main__:main'
         }
-    }, install_requires=['click']
+    }, install_requires=['click', 'tabulate']
 )

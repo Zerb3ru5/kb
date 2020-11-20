@@ -89,6 +89,21 @@ def list(property, value):
     elif property != 'all' and value is None:
         return {'code': 1, 'return': 'Missing argument \'VALUE\''}
 
+    # if the search key is the id
+    elif property == 'id':
+        item = db.get_items_by_column(connection, 'id', value)[0]
+        description = ['   Id:', '   Title:', '   Type:', '   Value:', '   Date of creation:', '   Time of creation:',
+                       '   Author:', '   Parent:']
+
+        # format it to a table
+        item_data = []
+
+        for i in range(len(item)):
+            item_data.append((description[i], item[i]))
+        table = op.to_light_table(item_data)
+
+        return {'code': 2, 'return': f'{item[0]} [ITEM] at main\n\n' + table}
+
     # if the search key is a category
     elif property == 'category':
         category_id = db.get_category_id(connection, value)

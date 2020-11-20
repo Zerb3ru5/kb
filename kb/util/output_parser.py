@@ -1,9 +1,12 @@
 from click import secho
-from tabulate import tabulate
+import tabulate as t
 import sys
 from datetime import date, datetime
 from kb.util.default_values import DATABASE_PATH
 import traceback
+
+# make that the spaces in front of the columns don't get cut off
+t.PRESERVE_WHITESPACE = True
 
 
 def output_parse(func):
@@ -28,8 +31,12 @@ def output_parse(func):
 
 
 def to_table(data, header):
-    return tabulate(tabular_data=data, headers=header, tablefmt='simple', stralign='right')
+    return t.tabulate(tabular_data=data, headers=header, tablefmt='simple', stralign='right')
+
+
+def to_light_table(data):
+    return t.tabulate(tabular_data=data, tablefmt='plain', stralign='left')
 
 
 def to_list(data):
-    return tabulate(tabular_data=data, tablefmt='simple', stralign='left')
+    return t.tabulate(tabular_data=data, tablefmt='simple', stralign='left')

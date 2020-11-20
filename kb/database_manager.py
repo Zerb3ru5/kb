@@ -21,8 +21,6 @@ def create_connection(db_file: str):
     :return conn:
     """
 
-    # TODO: Add nesting of the items (parents)
-
     if os.path.isfile(db_file):
         conn = sqlite3.connect(db_file)
         c = conn.cursor()
@@ -76,7 +74,8 @@ def add_item(conn, item: Item):
     c = conn.cursor()
 
     # add the item to the registy table
-    c.execute('''INSERT INTO registry (id, title, type, value, date, time, author, parent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+    c.execute('''INSERT INTO registry (id, title, type, value, date, time, author, parent) VALUES (?, ?, ?, ?, ?, ?, 
+    ?, ?)''',
               (item.id, item.title, item.type, item.value, item.date, item.time, item.author, item.parent))
     conn.commit()
 
@@ -206,7 +205,7 @@ def get_items_by_column(conn, column, value):
         return {'code': 1, 'return': f'Unknown property \'{column}\''}
 
     # if the result is empty
-    if result == ():
+    if not result:
         return {'code': 1, 'return': f'No item found with {value} in the {column}'}
     else:
         return {'code': 0, 'return': result}
