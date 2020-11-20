@@ -1,0 +1,3 @@
+[console_scripts]
+kb = kb.__main__:main
+
