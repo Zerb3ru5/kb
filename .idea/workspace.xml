@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7c52aa9b-455d-49ae-97ea-dc948a62786b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bases/main.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/bases/main.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kb/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/__main__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kb/commands/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/commands/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kb/database_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/database_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kb/util/output_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/util/output_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +26,7 @@
   <component name="ProjectId" id="1k9viBRlAkujJAI3xcQM8B3kZbs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>

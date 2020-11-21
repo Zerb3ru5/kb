@@ -1,6 +1,7 @@
 import kb.util.default_values as default_values
 import kb.database_manager as db
 import kb.util.output_parser as op
+import kb.file_manager as fm
 from kb.datatypes.item import Item
 import click
 
@@ -32,18 +33,37 @@ def add(title, type, value, categories, parent):
                 return {'code': 1, 'return': f'Unknown category \'{category}\''}
 
     # TODO: Support for giving search results as parent (the ones with only one result)
+    # check if the parent id the main item (.)
+    if parent == '.':
+        pass
     # check if the parent exists
-    if not db.check_item_existence(connection, parent):
+    elif not db.check_item_existence(connection, parent):
         return {'code': 1, 'return': f'Unknown item {parent}'}
 
-    item = Item(
-        id=db.generate_item_ids(1)[0],
-        title=title,
-        type=type,
-        value=value,
-        categories=categories,
-        parent=parent
-    )
+    # check if the item is a file
+    if type == 'file':
+        # a different adding procedure
+        id = db.generate_item_ids(1)[0]
+        value = fm.add_file(connection, id, parent, value)
+
+        item = Item(
+            id=id,
+            title=title,
+            type=type,
+            value=value,
+            categories=categories,
+            parent=parent
+        )
+    # utilize the default adding procedure
+    else:
+        item = Item(
+            id=db.generate_item_ids(1)[0],
+            title=title,
+            type=type,
+            value=value,
+            categories=categories,
+            parent=parent
+        )
 
     db.add_item(connection, item)
 
@@ -51,21 +71,21 @@ def add(title, type, value, categories, parent):
 
 
 @op.output_parse
-def list(property, value):
+def _list(_property, value):
     """
     calls the get_all function from the filesystem to print all the items in the database
-    :param property:
+    :param _property:
     :param value:
     :return:
     """
     connection = db.create_connection(db_file=default_values.DATABASE_PATH + '\\bases\\main.db')
 
     # if the property is all just print the whole database
-    if property == 'all' and value is None:
+    if _property == 'all' and value is None:
         items = db.get_all_items(connection)
 
     # if there are special arguments after -a
-    elif property == 'all' and value is not None:
+    elif _property == 'all' and value is not None:
         # if "c" is given, print all the categories
         if value == 'c' or value == 'categories':
             categories = db.get_all_categories(connection)
@@ -86,11 +106,11 @@ def list(property, value):
             return {'code': 1, 'return': f'Got unexpected extra argument \'{value}\''}
 
     # raise error if no value is given
-    elif property != 'all' and value is None:
+    elif _property != 'all' and value is None:
         return {'code': 1, 'return': 'Missing argument \'VALUE\''}
 
     # if the search key is the id
-    elif property == 'id':
+    elif _property == 'id':
         item = db.get_items_by_column(connection, 'id', value)[0]
         description = ['   Id:', '   Title:', '   Type:', '   Value:', '   Date of creation:', '   Time of creation:',
                        '   Author:', '   Parent:']
@@ -105,7 +125,7 @@ def list(property, value):
         return {'code': 2, 'return': f'{item[0]} [ITEM] at main\n\n' + table}
 
     # if the search key is a category
-    elif property == 'category':
+    elif _property == 'category':
         category_id = db.get_category_id(connection, value)
         item_ids = db.get_item_ids_by_category_id(connection, value, category_id)
 
@@ -118,26 +138,37 @@ def list(property, value):
 
     # if the search key is any other property
     else:
-        items = db.get_items_by_column(connection, property, value)
+        items = db.get_items_by_column(connection, _property, value)
         print(items)
 
     # TODO: Make it possible to search for multiple things  at once [example: kb list -c eagle -tp number; meaning:
     #  list all the entries that are associated with the category eagle and are numbers]
 
-    # TODO: Shorten the table (The metadata is not necessary)
+    # TODO: Apply the custom item view always if there is only one search result
 
-    table = op.to_table(items, ['Id', 'Title', 'Type', 'Value', 'Date of creation', 'Time of creation', 'Author', 'Parent'])
+    # shorten the table
+    formatted_list = []
+    for item in items:
+        formatted_item = []
+        for i in range(len(item)):
+            if i not in (4, 5, 6):
+                formatted_item.append(item[i])
+        formatted_list.append(formatted_item)
+
+    table = op.to_table(formatted_list, ['Id', 'Title', 'Type', 'Value', 'Parent'])
 
     return {'code': 2, 'return': table}
 
 
-def delete(property, value):
+def delete(_property, value):
     """
     delete an item by looking for the right property - value pairs
     :param value:
-    :param property:
+    :param _property:
     :return:
     """
+    # TODO: give a feedback after deleting files
+    # TODO: when a file item is deleted, delete the associated file in files as well
     connection = db.create_connection(db_file=default_values.DATABASE_PATH + '\\bases\\main.db')
 
-    db.delete_items_by_column(connection, property, value)
+    db.delete_items_by_column(connection, _property, value)

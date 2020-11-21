@@ -56,7 +56,7 @@ def list(property, value):
 
     kb list -tp/-c/-dt/-n (defaults to c) [VALUE]
     """
-    cmd.list(property, value)
+    cmd._list(property, value)
 
     # TODO: add special tree view of all items when tree is typed in
 
