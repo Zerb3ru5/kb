@@ -229,6 +229,38 @@ def check_item_existence(conn, id):
         return False
 
 
+def isParent(conn, item_id):
+    """
+    checks if the id is anywhere in the parent column
+    :param conn:
+    :param item_id:
+    :return:
+    """
+    c = conn.cursor()
+
+    c.execute('''SELECT id FROM registry WHERE parent=?''', (item_id,))
+
+    if c.fetchone():
+        return True
+    else:
+        return False
+
+def update_item_prop_by_id(conn, id, property, new_value):
+    """
+    changes the property given to the new value on the item specified by the id
+    :param conn:
+    :param id:
+    :param property:
+    :param new_value:
+    :return:
+    """
+    c = conn.cursor()
+    print(id, property, new_value)
+
+    c.execute(f'''UPDATE registry SET {property}=? WHERE id=?''', (new_value, id,))
+    conn.commit()
+
+
 def create_category(conn, category_name):
     """
     adds a new category to the database

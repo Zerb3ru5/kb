@@ -42,6 +42,12 @@ def add(title, type, value, categories, parent):
 
     # check if the item is a file
     if type == 'file':
+        # if the parent is also a file, prepare it to be a parent
+        if parent != '.':
+            parent_item = db.get_items_by_column(connection, 'id', parent)[0]
+
+            fm.make_parent(connection, parent_item[0], parent_item[3])
+
         # a different adding procedure
         id = db.generate_item_ids(1)[0]
         value = fm.add_file(connection, id, parent, value)

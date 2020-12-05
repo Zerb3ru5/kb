@@ -4,8 +4,12 @@
     <list default="true" id="7c52aa9b-455d-49ae-97ea-dc948a62786b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/bases/main.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/bases/main.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kb/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/files/main/1zluo3a8u8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kb.egg-info/SOURCES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/kb.egg-info/SOURCES.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kb/commands/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/commands/commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kb/database_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/database_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kb/file_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/file_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kb/util/default_values.py" beforeDir="false" afterPath="$PROJECT_DIR$/kb/util/default_values.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,10 +32,12 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nutzer\Desktop\Private\Programming\Projects\kb\data\files\main" />
       <recent name="C:\Users\Nutzer\Desktop\Private\Programming\Projects\kb\kb" />
       <recent name="C:\Users\Nutzer\Desktop\Private\Programming\Projects\kb\data\bases" />
       <recent name="C:\Users\Nutzer\Desktop\Private\Programming\Projects\kb\kb\util" />
