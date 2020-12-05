@@ -150,7 +150,21 @@ def _list(_property, value):
     # TODO: Make it possible to search for multiple things  at once [example: kb list -c eagle -tp number; meaning:
     #  list all the entries that are associated with the category eagle and are numbers]
 
-    # TODO: Apply the custom item view always if there is only one search result
+    # if there is only one result, display it in the special item view
+    if len(items) == 1:
+        item = items[0]
+        description = ['   Id:', '   Title:', '   Type:', '   Value:', '   Date of creation:',
+                       '   Time of creation:',
+                       '   Author:', '   Parent:']
+
+        # format it to a table
+        item_data = []
+
+        for i in range(len(item)):
+            item_data.append((description[i], item[i]))
+        table = op.to_light_table(item_data)
+
+        return {'code': 2, 'return': f'{item[0]} [ITEM] at main\n\n' + table}
 
     # shorten the table
     formatted_list = []
